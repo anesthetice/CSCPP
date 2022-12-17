@@ -40,11 +40,32 @@ function newcscpp {
         echo "use 'cscpp --help' for more information"
         return
     fi
+
+    if [ -e "$1" ]
+    then
+        echo -e -n "${GREEN}   Compiling${NC} '"$1"'"
+        if [ $# -gt 1 ]
+        then
+            echo -n " --> linked with : "
+            for ARGUMENT in $@
+            do
+                if [ $ARGUMENT != $1 ]
+                then
+                    echo -n "'"$ARGUMENT"' "
+                fi
+            done
+        fi
+        echo ""
+        g++ -std=c++11 -Wall "$@" -o "$1".out && \
+        echo -e "${GREEN}     Running${NC} '"$1".out'" && \
+        ./"$1".out
+    fi
+
     
     if [ $1 == "clean" ]
     then
         FILE_LIST=($(find . -type f -name '*.cpp.out' -print))
-        if [ FILE_LIST=="" ]
+        if [ "$FILE_LIST" = "" ]
         then
             echo "There is nothing to clean"
             return
@@ -56,16 +77,17 @@ function newcscpp {
             echo ">> "$ELEMENT""
         done
         echo ""
-        read -p "Are you sure you wish to delete these "$FILE_LIST_SIZE" files? (y/n) " RESPONSE
+        read -p "confirm deletion? (y/n) " RESPONSE
         if [[ "$RESPONSE" == "y" || "$RESPONSE" == "Y" || "$RESPONSE" == "yes" || "$RESPONSE" == "Yes" ]]
         then
             rm --interactive='never' "${FILE_LIST[@]}" 
-            echo "Successfully deleted "${FILE_LIST_SIZE}" files"
+            echo "Opertion complete"
         else
-            echo "Operation cancelled by user"
+            echo "Operation cancelled"
         fi
         return
     fi
+
 
 
     
@@ -87,9 +109,8 @@ function newcscpp {
 comment
 }
 
-#cscpp solotest.cpp
-#cscpp test.cpp test2.cpp test3.cpp
-#cscpp solotest2.cpp
-#cscpp solotest3.cpp
-#echo ""
+newcscpp solotest.cpp
+newcscpp test.cpp test2.cpp test3.cpp
+newcscpp solotest2.cpp
+newcscpp solotest3.cpp
 newcscpp clean
