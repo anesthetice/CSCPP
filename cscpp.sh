@@ -6,7 +6,7 @@ function cscpp {
     BGreen='\033[1;32m'
     NC='\033[0m'
 
-    if ! [[ $# -gt 0 ]]
+    if ! [[ "$#" -gt 0 ]]
     then 
         echo "CSCPP Version 1.0"
         echo "use 'cscpp --help' for more information"
@@ -32,7 +32,7 @@ function cscpp {
     if [[ -e "$1" ]]
     then
         echo -e -n "${BGreen}   Compiling${NC} '"$1"'"
-        if [[ $# -gt 1 ]]
+        if [[ "$#" -gt 1 ]]
         then
             echo -n " --> linked with : "
             for ARGUMENT in {$@:2}
@@ -48,10 +48,10 @@ function cscpp {
     elif [[ "$1" == "run" || "$1" == "r" ]]
     then
         echo -e -n "${BGreen}   Compiling${NC} '"$2"'"
-        if [[ $# -gt 2 ]]
+        if [[ "$#" -gt 2 ]]
         then
             echo -n " --> linked with : "
-            for ARGUMENT in ${@:3}
+            for ARGUMENT in "${@:3}"
             do
                 echo -n "'"$ARGUMENT"' "
             done
@@ -64,10 +64,10 @@ function cscpp {
     elif [[ "$1" == "build" || "$1" == "b" ]]
     then
         echo -e -n "${BGreen}   Compiling${NC} '"$2"'"
-        if [[ $# -gt 2 ]]
+        if [[ "$#" -gt 2 ]]
         then
             echo -n " --> linked with : "
-            for ARGUMENT in ${@:3}
+            for ARGUMENT in "${@:3}"
             do
                 echo -n "'"$ARGUMENT"' "
             done
@@ -76,7 +76,7 @@ function cscpp {
         g++ -std=c++11 -Wall "${@:2}" -o "$2".out
         
 
-    elif [[ $1 == "clean" ]]
+    elif [[ "$1" == "clean" ]]
     then
         FILE_LIST=($(find . -type f -name '*.cpp.out' -print))
         if [[ "$FILE_LIST" = "" ]]
@@ -113,6 +113,4 @@ cscpp b solotest3.cpp
 cscpp clean
 cscpp
 cscpp -h
-
-echo 
 cscpp adhj
