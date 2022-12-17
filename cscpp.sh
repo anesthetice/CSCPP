@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 function cscpp {
     BRed='\033[1;31m'
     BGreen='\033[1;32m'
@@ -74,11 +73,10 @@ function cscpp {
         fi
         echo ""
         g++ -std=c++11 -Wall "${@:2}" -o "$2".out
-        
 
     elif [[ "$1" == "clean" ]]
     then
-        FILE_LIST=($(find . -type f -name '*.cpp.out' -print))
+        FILE_LIST=($(find . \( -name '*.cpp.out' -or -name '*.cc.out' \) -print))
         if [[ "$FILE_LIST" = "" ]]
         then
             echo "There is nothing to clean"
@@ -110,7 +108,8 @@ cscpp run solotest.cpp
 cscpp r test.cpp test2.cpp test3.cpp
 cscpp build solotest2.cpp
 cscpp b solotest3.cpp
+cscpp build cctest.cc
 cscpp clean
 cscpp
 cscpp -h
-cscpp adhj
+cscpp adh

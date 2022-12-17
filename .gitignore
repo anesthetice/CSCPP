@@ -1,3 +1,5 @@
 *.cpp
 *.cpp.out
 *.hpp
+*.cc
+*.cc.out
