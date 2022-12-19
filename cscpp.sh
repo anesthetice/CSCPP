@@ -34,7 +34,7 @@ function cscpp {
         if [[ "$#" -gt 1 ]]
         then
             echo -n " --> linked with : "
-            for ARGUMENT in {$@:2}
+            for ARGUMENT in ${@:2}
             do
                 echo -n "'"$ARGUMENT"' "
             done
@@ -104,8 +104,9 @@ function cscpp {
     fi
 }
 
+# This is for testing purposes only, do not copy
 cscpp run solotest.cpp
-cscpp r test.cpp test2.cpp test3.cpp
+cscpp test.cpp test2.cpp test3.cpp
 cscpp build solotest2.cpp
 cscpp b solotest3.cpp
 cscpp build cctest.cc
