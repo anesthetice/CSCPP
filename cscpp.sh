@@ -1,5 +1,3 @@
-#!/bin/bash
-
 function cscpp {
     BRed='\033[1;31m'
     BGreen='\033[1;32m'
@@ -15,6 +13,8 @@ function cscpp {
     if [[ "$1" == "-h" || "$1" == "--help" ]]
     then
         echo "CSCPP Version 1.0"
+        echo ""
+        echo "currently using 'g++ -std=c++11 -Wall' to compile"
         echo ""
         echo "Usage : cscpp [OPTIONS] [SUBCOMMAND]"
         echo ""
@@ -92,7 +92,7 @@ function cscpp {
         if [[ "$RESPONSE" == "y" || "$RESPONSE" == "Y" || "$RESPONSE" == "yes" || "$RESPONSE" == "Yes" ]]
         then
             rm --interactive='never' "${FILE_LIST[@]}" 
-            echo "Opertion complete"
+            echo "Opertion completed"
         else
             echo "Operation cancelled"
         fi
@@ -103,14 +103,3 @@ function cscpp {
         echo "try 'cscpp --help' for more information"
     fi
 }
-
-# This is for testing purposes only, do not copy
-cscpp run solotest.cpp
-cscpp test.cpp test2.cpp test3.cpp
-cscpp build solotest2.cpp
-cscpp b solotest3.cpp
-cscpp build cctest.cc
-cscpp clean
-cscpp
-cscpp -h
-cscpp adh
