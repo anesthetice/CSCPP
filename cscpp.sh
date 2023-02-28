@@ -12,7 +12,7 @@ function cscpp {
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]
     then
-        echo "CSCPP Version 1.0"
+        echo "CSCPP Version 1.1"
         echo ""
         echo "currently using 'g++ -std=c++11 -Wall' to compile"
         echo ""
@@ -23,6 +23,7 @@ function cscpp {
         echo ""
         echo "SUBCOMMANDS:"
         echo "      build, b    compiles but does not execute a .cpp or .cc file"
+        echo "      debug, d    compiles with debug information but does not execute a .cpp or .cc file"
         echo "      run, r      default subcommand, compiles and executes a .cpp or .cc file"
         echo "      clean       finds and removes all *.cpp.out in the current directory and sub-directories"
         return
@@ -73,6 +74,20 @@ function cscpp {
         fi
         echo ""
         g++ -std=c++11 -Wall "${@:2}" -o "$2".out
+    
+    elif [[ "$1" == "debug" || "$1" == "d" ]]
+    then
+        echo -e -n "${BGreen}   Compiling${NC} '"$2"'"
+        if [[ "$#" -gt 2 ]]
+        then
+            echo -n " --> linked with : "
+            for ARGUMENT in "${@:3}"
+            do
+                echo -n "'"$ARGUMENT"' "
+            done
+        fi
+        echo ""
+        g++ -std=c++11 -g -Wall "${@:2}" -o "$2".out
 
     elif [[ "$1" == "clean" ]]
     then
