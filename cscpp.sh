@@ -5,7 +5,7 @@ function cscpp {
 
     if ! [[ "$#" -gt 0 ]]
     then 
-        echo "CSCPP Version 1.0"
+        echo "CSCPP Version 1.1"
         echo "use 'cscpp --help' for more information"
         return
     fi
@@ -94,7 +94,7 @@ function cscpp {
         FILE_LIST=($(find . \( -name '*.cpp.out' -or -name '*.cc.out' \) -print))
         if [[ "$FILE_LIST" = "" ]]
         then
-            echo "There is nothing to clean"
+            echo "there is nothing to clean"
             return
         fi
         FILE_LIST_SIZE=$((0))
@@ -103,13 +103,13 @@ function cscpp {
             FILE_LIST_SIZE=$(("$FILE_LIST_SIZE" + 1))
             echo ">> "$ELEMENT""
         done
-        read -p "Confirm deletion? (y/n) " RESPONSE
+        read -p "confirm deletion? (y/n) " RESPONSE
         if [[ "$RESPONSE" == "y" || "$RESPONSE" == "Y" || "$RESPONSE" == "yes" || "$RESPONSE" == "Yes" ]]
         then
             rm --interactive='never' "${FILE_LIST[@]}" 
-            echo "Opertion completed"
+            echo "opertion completed"
         else
-            echo "Operation cancelled"
+            echo "operation cancelled"
         fi
         return
     
